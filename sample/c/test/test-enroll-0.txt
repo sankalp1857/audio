@@ -1,0 +1,50 @@
+   345   1095 armadillo-1
+  2550   3285 armadillo-1
+  5115   5820 armadillo-1
+  7410   8085 armadillo-1
+  9435  10125 armadillo-1
+ 11490  12150 armadillo-1
+ 13590  14370 armadillo-6
+ 15600  16410 armadillo-6
+ 17670  18435 armadillo-6
+ 19695  20460 armadillo-6
+ 21915  22695 armadillo-6
+ 24150  24930 armadillo-6
+ 26355  27060 jackalope-1
+ 28935  29535 jackalope-1
+ 31230  31875 jackalope-1
+ 33120  33810 jackalope-1
+ 35100  35760 jackalope-1
+ 36960  37665 jackalope-1
+ 39240  39780 jackalope-4
+ 41370  42060 jackalope-4
+ 43560  44175 jackalope-4
+ 45735  46335 jackalope-4
+ 48150  48720 jackalope-4
+ 50370  50985 jackalope-4
+ 53130  53850 terminator-2
+ 55500  56205 terminator-2
+ 57975  58635 terminator-2
+ 60390  61080 terminator-2
+ 63105  63810 terminator-2
+ 65610  66390 terminator-2
+ 68010  68775 terminator-6
+ 70590  71295 terminator-6
+ 73095  73845 terminator-6
+ 75705  76530 terminator-6
+ 78420  79140 terminator-6
+ 81015  81765 terminator-6
+ 83550  84210 armadillo-1
+ 87855  88440 armadillo-1
+ 88530  89580 armadillo-1
+ 90855  91455 armadillo-1
+ 93780  94500 armadillo-1
+ 95565  96210 armadillo-1
+ 97695  98400 armadillo-1
+100815 101460 armadillo-1
+104265 104850 jackalope-1
+107520 108135 jackalope-1
+111135 111780 jackalope-1
+114720 115335 jackalope-1
+117900 118455 jackalope-1
+121380 121950 jackalope-1

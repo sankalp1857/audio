@@ -1,0 +1,10 @@
+/Users/sankalp/Sensory/TrulyNaturalSDK/7.4.0/sample/c/build-sample/bin/live-enroll
+/Users/sankalp/Sensory/TrulyNaturalSDK/7.4.0/sample/c/build-sample/bin/live-segment
+/Users/sankalp/Sensory/TrulyNaturalSDK/7.4.0/sample/c/build-sample/bin/live-spot
+/Users/sankalp/Sensory/TrulyNaturalSDK/7.4.0/sample/c/build-sample/bin/push-audio
+/Users/sankalp/Sensory/TrulyNaturalSDK/7.4.0/sample/c/build-sample/bin/snsr-edit
+/Users/sankalp/Sensory/TrulyNaturalSDK/7.4.0/sample/c/build-sample/bin/snsr-eval
+/Users/sankalp/Sensory/TrulyNaturalSDK/7.4.0/sample/c/build-sample/bin/spot-convert
+/Users/sankalp/Sensory/TrulyNaturalSDK/7.4.0/sample/c/build-sample/bin/spot-data
+/Users/sankalp/Sensory/TrulyNaturalSDK/7.4.0/sample/c/build-sample/bin/spot-data-stream
+/Users/sankalp/Sensory/TrulyNaturalSDK/7.4.0/sample/c/build-sample/bin/spot-enroll

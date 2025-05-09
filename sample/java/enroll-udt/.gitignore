@@ -1,0 +1,17 @@
+# - directories
+.idea/copyright/
+.idea/libraries/
+.idea/dictionaries/
+.idea/inspectionProfiles/
+.gradle/
+build/
+
+# - files
+.idea/*.xml
+.DS_STORE
+local.properties
+*.iml
+*.apk
+*.ltran
+*.snsr
+

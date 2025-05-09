@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    namespace 'com.sensory.speech.snsr.demo.spotdebug'
+    compileSdkVersion 31
+
+    defaultConfig {
+        applicationId "com.sensory.speech.snsr.demo.spotdebug"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", "DEBUG_TEMPLATE",
+                "\"${DEBUG_TEMPLATE_NAME}-${DEBUG_TEMPLATE_VERSION}.snsr\""
+        buildConfigField "String", "TRIGGER",
+                "\"${TRIGGER_NAME}-${TRIGGER_VERSION}.snsr\""
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+/// [thf repository]
+repositories {
+    maven {
+           url "${SNSR_REPOSITORY}"
+    }
+    mavenLocal()
+}
+/// [thf repository]
+
+/// [thf configurations]
+apply from: '../gradle/model-utils.gradle'
+
+configurations {
+       snsr_model
+}
+/// [thf configurations]
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.13.2'
+    //noinspection GradleDependency,GradleDependency
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    //noinspection GradleDependency
+    implementation 'com.google.android.material:material:1.0.0'
+
+    /// [thf dependencies]
+    // TrulyHandsfree SDK dependencies
+    implementation "com.sensory.speech.snsr:${SNSR_LIB_TYPE}:${SNSR_LIB_VERSION}@aar"
+    // TrulyHandsdfree task model
+    snsr_model "com.sensory.speech.snsr.model:${TRIGGER_NAME}:${TRIGGER_VERSION}@snsr"
+    snsr_model "com.sensory.speech.snsr.model:${DEBUG_TEMPLATE_NAME}:${DEBUG_TEMPLATE_VERSION}@snsr"
+    /// [thf dependencies]
+}

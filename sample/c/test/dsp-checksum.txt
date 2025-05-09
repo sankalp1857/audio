@@ -1,0 +1,3 @@
+a16e98cbf5396a01f40463c01cf60386bca0b3d7 *./build/out/dsp-pc38-3.4.0-op10-prod-net.bin
+40a1b9c31b3f3b5f181eb5eb31da4f19fc153951 *./build/out/dsp-pc38-3.4.0-op10-prod-search.bin
+90e8d2eee55e30184f9b69947d0cf03aee57d918 *./build/out/dsp-search-check.h

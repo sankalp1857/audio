@@ -1,0 +1,4 @@
+
+Spotted "hello blue genie" from sample 6720 to sample 18000
+Done, found phrase.
+

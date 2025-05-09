@@ -1,0 +1,14 @@
+   345   1095 armadillo-1
+  2550   3285 armadillo-1
+  5115   5820 armadillo-1
+  7410   8085 armadillo-1
+  9435  10125 armadillo-1
+ 11490  12180 armadillo-1
+ 83550  84210 armadillo-1
+ 87885  88440 armadillo-1
+ 88530  89580 armadillo-1
+ 90855  91455 armadillo-1
+ 93780  94500 armadillo-1
+ 95565  96180 armadillo-1
+ 97695  98430 armadillo-1
+100815 101370 armadillo-1

@@ -1,0 +1,9 @@
+.DS_Store
+.Trashes
+*.lock
+*.snsr
+*.swp
+*~.nib
+DerivedData/
+build/
+xcuserdata/

@@ -1,0 +1,30 @@
+/* Sensory SDK task model utility
+ * Adds a snsr_model configuration to copy binary assets from a repository
+ * into assets/models in the application.
+ */
+ext.extraAssets=file("$buildDir/assets")
+ext.modelAssets=file("$extraAssets/models")
+
+android {
+  //noinspection GroovyAssignabilityCheck
+  sourceSets {
+    main {
+      assets.srcDirs += "$extraAssets"
+    }
+  }
+}
+
+task deployModels {
+  doLast {
+    configurations.snsr_model.resolvedConfiguration.resolvedArtifacts.each {
+      model ->
+      copy {
+        from model.file
+        into file("$modelAssets")
+        rename { f -> //noinspection GroovyUnusedAssignment
+                 f= model.name + '.' + model.extension }
+      }
+    }
+  }
+}
+preBuild.dependsOn deployModels

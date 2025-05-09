@@ -1,0 +1,24 @@
+# - - - For Android Studio
+
+# - directories
+.idea/copyright/
+.idea/libraries/
+.idea/dictionaries/
+.idea/inspectionProfiles/
+app/build/
+.gradle/
+build/
+captures
+app/src/main/obj/
+
+
+# - files
+.idea/*.xml
+.DS_STORE
+local.properties
+*.iml
+*.apk
+*.ltran
+# - - -
+
+

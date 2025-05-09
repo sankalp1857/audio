@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sensory.speech.snsr.demo.spotdebug.MainActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:weightSum="1"
+        tools:ignore="UselessParent">
+
+        <CheckBox
+            android:id="@+id/checkBoxDebug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_debugging" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_gravity="center"
+            android:weightSum="1"
+            android:layout_height="wrap_content"
+            >
+            <Button
+                    android:id="@+id/buttonTalk"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/talk_button"
+                    android:onClick="onButtonTalk"
+                    android:textSize="22sp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    style="?android:attr/borderlessButtonStyle" />
+                <Button
+                    android:id="@+id/buttonStop"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/stop_button"
+                    android:onClick="onButtonStop"
+                    android:textSize="22sp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    style="?android:attr/borderlessButtonStyle" />
+            </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/textViewState"
+            android:layout_weight="0.03"
+            android:textAlignment="center"
+            tools:targetApi="jelly_bean_mr1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal" />
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView"
+            tools:ignore="UselessParent"
+            android:layout_weight="0.94">
+
+            <TextView
+                android:id="@+id/textViewConsole"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="false"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:maxLines="1000"
+                 />
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>

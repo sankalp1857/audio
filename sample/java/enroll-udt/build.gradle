@@ -1,0 +1,147 @@
+/*
+ * TrulyHandsfree SDK User-Defined Trigger enrollment and evaluation sample.
+ *
+ * Enroll a new trigger phrase "custom-phrase" from the command line:
+ * ./gradlew -q enroll
+ *
+ * Enroll a second trigger using tag "phrase-2":
+ * ./gradlew -q enroll -Ptag=phrase-2
+ *
+ * Use the enrolled trigger model to phrase spot.
+ * ./gradlew -q eval    #
+ * ./gradlew -q tasks
+ *
+ * Run a fixed-trigger phrase spotter and save the audio following the spot to
+ * "segmented-audio.wav":
+ * ./gradlew -q segment
+ * To include the spotted phrase in the audio file:
+ * ./gradlew -q segment -Pinclude-spot
+ *
+ * Run enrollment unit tests:
+ * ./gradlew test
+ *
+ * https://docs.gradle.org/3.2/userguide/tutorial_java_projects.html
+ */
+
+plugins {
+  id "java"
+  id "com.github.gmazzo.buildconfig" version "3.0.3"
+}
+
+/* Java 8 is required for unit test code, which uses lambda expressions
+ * enrollUDT.java and evalUDT.java requires Java 7.
+ */
+sourceCompatibility = 1.8
+
+description 'TrulyHandsfree SDK User-Defined Trigger enrollment and evaluation.'
+version '1.0.0'
+
+ext.nativeType = (
+  System.getProperty('os.name')
+  + '-' + System.getProperty('os.arch')
+  + (file('/lib/arm-linux-gnueabihf').isDirectory()? '-hf': '')
+  ).replaceAll(' ', '_').toLowerCase().replaceFirst(/windows_.+-/, /windows-/)
+ext.nativeLibDir = "${buildDir}/libs/native".replace('\\', '/')
+ext.modelDir = "${buildDir}/model".replace('\\','/')
+
+ext.nativeType = ext.nativeType.replaceFirst(/^mac_os_x-.+/, 'macos-universal')
+
+buildConfig {
+  packageName "enroll"
+  buildConfigField 'String', 'APP_NAME', "\"${project.name}\""
+  buildConfigField 'String', 'APP_VERSION', "\"${project.version}\""
+  buildConfigField 'String', 'MODEL_DIR',  "\"${modelDir}\""
+  buildConfigField 'String', 'UDT_MODEL',
+    "\"${modelDir}/udt-universal-" + UDT_ENUS_VERSION.replace(":", "-") + ".snsr\""
+  buildConfigField 'String', 'ENROLLED_MODEL',
+    "\"${modelDir}/enrolled-sv.snsr\""
+  buildConfigField 'String', 'HBG_MODEL',
+    "\"${modelDir}/spot-hbg-enUS-" + HBG_ENUS_VERSION.replace(":", "-") + ".snsr\""
+  buildConfigField 'String', 'VAD_TEMPLATE',
+    "\"${modelDir}/tpl-spot-vad-" + VAD_VERSION.replace(":", "-") + ".snsr\""
+  buildConfigField 'String', 'ENROLLMENT_DIR', "\"../../../data/enrollments\""
+}
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+  maven {
+    url "${SNSR_REPOSITORY}"
+  }
+  mavenLocal()
+  // Use mavenCentral for resolving dependencies.
+  // You can declare any Maven/Ivy/file repository here.
+  mavenCentral()
+}
+
+configurations {
+  nativeBundle
+  snsrModel
+}
+
+task extractNativeBundle(type: Sync) {
+  from {
+    configurations.nativeBundle.collect {
+      zipTree it
+    }
+ }
+ into nativeLibDir
+}
+
+task copySnsrModel(type: Copy) {
+ from {
+   configurations.snsrModel.collect()
+ }
+ into modelDir
+}
+
+dependencies {
+  // The production code uses the SLF4J logging API at compile time
+  implementation 'org.slf4j:slf4j-api:1.7.21'
+  testImplementation 'junit:junit:4.12'
+
+  implementation "com.sensory.speech.snsr:${SNSR_LIB_TYPE}:${SNSR_LIB_VERSION}"
+  nativeBundle "com.sensory.speech.snsr:${SNSR_LIB_TYPE}:${SNSR_LIB_VERSION}:${nativeType}@zip"
+  snsrModel "com.sensory.speech.snsr.model:udt-universal:${UDT_ENUS_VERSION}@snsr"
+  snsrModel "com.sensory.speech.snsr.model:spot-hbg-enUS:${HBG_ENUS_VERSION}@snsr"
+  snsrModel "com.sensory.speech.snsr.model:tpl-spot-vad:${VAD_VERSION}@snsr"
+}
+
+clean {
+  delete "${rootDir}/segmented-audio.wav"
+}
+
+tasks.withType(JavaExec) {
+  group 'executable'
+  classpath sourceSets.main.runtimeClasspath
+  dependsOn extractNativeBundle
+  dependsOn copySnsrModel
+  systemProperty 'java.library.path', nativeLibDir
+}
+
+tasks.withType(Test) {
+  dependsOn extractNativeBundle
+  dependsOn copySnsrModel
+  systemProperty 'java.library.path', nativeLibDir
+}
+
+task enroll(type:JavaExec) {
+  mainClass = 'enrollUDT'
+  description 'Enroll a trigger for phrase-spotting [-Ptag=user-or-phrase-tag].'
+  if (project.hasProperty('tag')) {
+   args(tag);
+  }
+}
+
+task eval(type:JavaExec) {
+  mainClass = 'evalUDT'
+  description 'Evaluate an enrolled phrase-spot trigger.'
+}
+
+task segment(type:JavaExec) {
+  mainClass = 'segmentSpottedAudio'
+  description 'Run a trigger and save trailing audio to file [-Pinclude-spot].'
+  if (project.hasProperty('include-spot')) {
+    args('include-spot=true');
+  }
+}
